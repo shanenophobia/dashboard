@@ -4,7 +4,7 @@ include 'db_connect.php';
 $sql = "SELECT * FROM sales_data ORDER BY date ASC";
 $result = $conn->query($sql);
 
-// Prepare data points
+
 $data_points = [];
 $total_sales = 0;
 $product_sales = [];
@@ -13,7 +13,7 @@ while ($row = $result->fetch_assoc()) {
     $data_points[] = $row;
     $total_sales += $row['sales'];
 
-    // Track top product
+
     $product = $row['product_name'];
     $product_sales[$product] = ($product_sales[$product] ?? 0) + $row['sales'];
 }
@@ -21,14 +21,11 @@ while ($row = $result->fetch_assoc()) {
 arsort($product_sales);
 $top_product = key($product_sales);
 
-// Re-fetch for table display
+
 $result = $conn->query($sql);
 ?>
 
-<!-- 
-    Integrate the dashboard into your website to make it easier to identify trends and other key insights. 
-    A more user-friendly and well-designed interface will help you achieve a higher score.
--->
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -36,7 +33,7 @@ $result = $conn->query($sql);
     <meta charset="UTF-8">
     <title>Sales Dashboard</title>
 
-    <!-- Styles & Icons -->
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/animate.css/animate.min.css" rel="stylesheet">
